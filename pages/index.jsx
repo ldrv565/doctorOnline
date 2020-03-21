@@ -1,9 +1,16 @@
 import React from 'react';
+import { Layout } from 'components';
 
-import { VideoApp } from 'components';
+import { Button } from '@material-ui/core';
 
 const IndexPage = () => {
-  return <VideoApp />;
+  return (
+    <Layout>
+      <Button variant="contained" color="primary">
+        Вызов
+      </Button>
+    </Layout>
+  );
 };
 
 export default IndexPage;
