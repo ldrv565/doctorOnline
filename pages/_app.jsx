@@ -4,7 +4,9 @@ import Head from 'next/head';
 import { StylesProvider } from '@material-ui/styles';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../core/theme/theme';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from 'core/theme/theme';
+import { TwilioVideoStateProvider } from 'components';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -22,30 +24,37 @@ class MyApp extends App {
 
     return (
       <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <Head>
-            <title>Doctor online</title>
-            <link rel="manifest" href="/manifest.json" />
-            <meta name="theme-color" content="#fff" />
-            <meta name="description" content="Doctor online" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
-            <meta name="apple-mobile-web-app-title" content="Doctor online" />
-            <link rel="apple-touch-icon" href="/images/icon-192.png" />
-            <link
-              rel="shortcut icon"
-              href="/images/favicon.ico"
-              type="image/png"
-            />
-            <link
-              href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-              rel="stylesheet"
-            />
-          </Head>
-          <CssBaseline />
-          <GlobalStyle />
-          <Component {...pageProps} pageContext={this.pageContext} />
-        </ThemeProvider>
+        <MuiThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
+            <Head>
+              <title>Doctor online</title>
+              <link rel="manifest" href="/manifest.json" />
+              <meta name="theme-color" content="#fff" />
+              <meta name="description" content="Doctor online" />
+              <meta name="apple-mobile-web-app-capable" content="yes" />
+              <meta
+                name="apple-mobile-web-app-status-bar-style"
+                content="#fff"
+              />
+              <meta name="apple-mobile-web-app-title" content="Doctor online" />
+              <link rel="apple-touch-icon" href="/images/icon-192.png" />
+              <link
+                rel="shortcut icon"
+                href="/images/favicon.ico"
+                type="image/png"
+              />
+              <link
+                href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+                rel="stylesheet"
+              />
+            </Head>
+            <CssBaseline />
+            <GlobalStyle />
+            <TwilioVideoStateProvider>
+              <Component {...pageProps} pageContext={this.pageContext} />
+            </TwilioVideoStateProvider>
+          </ThemeProvider>
+        </MuiThemeProvider>
       </StylesProvider>
     );
   }
