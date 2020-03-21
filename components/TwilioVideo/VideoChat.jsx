@@ -4,11 +4,15 @@ import Room from './Room';
 
 const VideoChat = () => {
   const [username, setUsername] = useState('');
-  const roomName = 'room';
+  const [roomName, setRoomName] = useState('');
   const [token, setToken] = useState(null);
 
   const handleUsernameChange = useCallback(event => {
     setUsername(event.target.value);
+  }, []);
+
+  const handleRoomNameChange = useCallback(event => {
+    setRoomName(event.target.value);
   }, []);
 
   const handleSubmit = useCallback(
@@ -26,7 +30,7 @@ const VideoChat = () => {
       ).then(res => res.json());
       setToken(data.token);
     },
-    [username]
+    [roomName, username]
   );
 
   const handleLogout = useCallback(() => {
@@ -42,6 +46,7 @@ const VideoChat = () => {
           username={username}
           roomName={roomName}
           handleUsernameChange={handleUsernameChange}
+          handleRoomNameChange={handleRoomNameChange}
           handleSubmit={handleSubmit}
         />
       )}

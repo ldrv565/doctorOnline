@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import Video from 'twilio-video';
+
 import Participant from './Participant';
 
 const Room = ({ roomName, token, handleLogout }) => {
@@ -41,7 +41,7 @@ const Room = ({ roomName, token, handleLogout }) => {
         return currentRoom;
       });
     };
-  }, [token]);
+  }, [roomName, token]);
 
   const remoteParticipants = participants.map(participant => (
     <Participant key={participant.sid} participant={participant} />
