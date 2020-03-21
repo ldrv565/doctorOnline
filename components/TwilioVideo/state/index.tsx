@@ -8,7 +8,10 @@ export interface StateContextType {
   error: TwilioError | null;
   setError(error: TwilioError | null): void;
   getToken(name: string, room: string, passcode?: string): Promise<string>;
-  user?: User | null | { displayName: undefined; photoURL: undefined; passcode?: string };
+  user?:
+    | User
+    | null
+    | { displayName: undefined; photoURL: undefined; passcode?: string };
   signIn?(passcode?: string): Promise<void>;
   signOut?(): Promise<void>;
   isAuthReady?: boolean;
@@ -33,29 +36,31 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
   let contextValue = {
     error,
     setError,
-    isFetching,
+    isFetching
   } as StateContextType;
 
   if (process.env.REACT_APP_SET_AUTH === 'firebase') {
     contextValue = {
       ...contextValue,
-      ...useFirebaseAuth(), // eslint-disable-line react-hooks/rules-of-hooks
+      ...useFirebaseAuth() // eslint-disable-line react-hooks/rules-of-hooks
     };
   } else if (process.env.REACT_APP_SET_AUTH === 'passcode') {
     contextValue = {
       ...contextValue,
-      ...usePasscodeAuth(), // eslint-disable-line react-hooks/rules-of-hooks
+      ...usePasscodeAuth() // eslint-disable-line react-hooks/rules-of-hooks
     };
   } else {
     contextValue = {
       ...contextValue,
       getToken: async (identity, roomName) => {
         const headers = new window.Headers();
-        const endpoint = process.env.REACT_APP_TOKEN_ENDPOINT || '/token';
+        const endpoint = process.env.REACT_APP_TOKEN_ENDPOINT || '/api/token';
         const params = new window.URLSearchParams({ identity, roomName });
 
-        return fetch(`${endpoint}?${params}`, { headers }).then(res => res.text());
-      },
+        return fetch(`${endpoint}?${params}`, { headers }).then(res =>
+          res.text()
+        );
+      }
     };
   }
 
@@ -74,7 +79,11 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
       });
   };
 
-  return <StateContext.Provider value={{ ...contextValue, getToken }}>{props.children}</StateContext.Provider>;
+  return (
+    <StateContext.Provider value={{ ...contextValue, getToken }}>
+      {props.children}
+    </StateContext.Provider>
+  );
 }
 
 export function useAppState() {
