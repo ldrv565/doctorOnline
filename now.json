@@ -15,5 +15,12 @@
       "src": "next.config.js",
       "use": "@now/next"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "TWILIO_ACCOUNT_SID": "AC9308a8063629e06caac2f8021a7487a7",
+      "TWILIO_API_KEY_SID": "SK5531507657675bc2095f4a55be27b88a",
+      "TWILIO_API_KEY_SECRET": "BfVwna6ynq2BLPmLY34luowYyhSj8kKM"
+    }
+  }
 }
