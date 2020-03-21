@@ -1,16 +1,8 @@
 import React from 'react';
-import { Layout } from 'components';
-
-import { Button } from '@material-ui/core';
+import { TwilioVideo } from 'components';
 
 const IndexPage = () => {
-  return (
-    <Layout>
-      <Button variant="contained" color="primary">
-        Вызов
-      </Button>
-    </Layout>
-  );
+  return <TwilioVideo />;
 };
 
 export default IndexPage;

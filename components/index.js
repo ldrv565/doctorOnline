@@ -1,3 +1,4 @@
 import Layout from './Layout';
+import TwilioVideo from './TwilioVideo';
 
-export { Layout };
+export { Layout, TwilioVideo };

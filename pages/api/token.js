@@ -21,5 +21,5 @@ module.exports = (req, res) => {
   token.identity = identity;
   const videoGrant = new VideoGrant({ room: roomName });
   token.addGrant(videoGrant);
-  res.send(token.toJwt());
+  res.send(JSON.stringify({ token: token.toJwt() }));
 };
