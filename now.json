@@ -16,6 +16,11 @@
       "use": "@now/next"
     }
   ],
+  "env": {
+    "TWILIO_ACCOUNT_SID": "@account-sid",
+    "TWILIO_API_KEY_SID": "@key-sid",
+    "TWILIO_API_KEY_SECRET": "@key-secret"
+  },
   "build": {
     "env": {
       "TWILIO_ACCOUNT_SID": "@account-sid",
