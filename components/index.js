@@ -1,3 +1,9 @@
 import Layout from './Layout';
 
-export { Layout };
+import {
+  AppStateProvider as TwilioVideoStateProvider,
+  VideoApp,
+  LoginPage
+} from './TwilioVideo';
+
+export { Layout, TwilioVideoStateProvider, VideoApp, LoginPage };
