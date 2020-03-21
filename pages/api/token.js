@@ -1,5 +1,4 @@
 const { AccessToken } = require('twilio').jwt;
-require('dotenv').config();
 
 const { VideoGrant } = AccessToken;
 
@@ -18,6 +17,7 @@ module.exports = (req, res) => {
       ttl: MAX_ALLOWED_SESSION_DURATION
     }
   );
+
   token.identity = identity;
   const videoGrant = new VideoGrant({ room: roomName });
   token.addGrant(videoGrant);
