@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "now dev",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js"
+    "start": "next start"
   },
   "keywords": [],
   "author": "",
