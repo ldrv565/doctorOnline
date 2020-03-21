@@ -41,7 +41,7 @@ const Room = ({ roomName, token, handleLogout }) => {
         return currentRoom;
       });
     };
-  }, [roomName, token]);
+  }, [token]);
 
   const remoteParticipants = participants.map(participant => (
     <Participant key={participant.sid} participant={participant} />

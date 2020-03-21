@@ -1,12 +1,6 @@
 import React from 'react';
 
-const Lobby = ({
-  username,
-  handleUsernameChange,
-  roomName,
-  handleRoomNameChange,
-  handleSubmit
-}) => {
+const Lobby = ({ username, handleUsernameChange, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Enter a room</h2>
@@ -17,17 +11,6 @@ const Lobby = ({
           id="field"
           value={username}
           onChange={handleUsernameChange}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="room">Room name:</label>
-        <input
-          type="text"
-          id="room"
-          value={roomName}
-          onChange={handleRoomNameChange}
           required
         />
       </div>
