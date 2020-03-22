@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import TokenContext from './TokenContext';
 
-const TokenProvider = ({ children, tokenProvider }) => {
+const TokenProvider = ({ children }) => {
+  const [token, setToken] = useState(null);
   const fetchToken = async (username, roomName) => {
-    const data = await fetch(
-      `/api/token?identity=${username}&roomName=${roomName}`,
-      {
-        method: 'GET',
+    await fetch(`/api/token?identity=${username}&roomName=${roomName}`, {
+      method: 'GET',
 
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
+    })
       .then(res => res.json())
-      .then(res => {localStorage.setItem('token', res.token); return res;})
-      .then(res => tokenProvider.setToken(res.token));
+      .then(res => {
+        localStorage.setItem('token', res.token);
+        return res;
+      })
+      .then(res => setToken(res.token));
   };
 
   useEffect(() => {
     if (process.browser) {
       if (localStorage.getItem('token')) {
-        tokenProvider.setToken(localStorage.getItem('token'));
+        setToken(localStorage.getItem('token'));
       }
     }
   }, []);
@@ -30,13 +32,17 @@ const TokenProvider = ({ children, tokenProvider }) => {
   return (
     <TokenContext.Provider
       value={{
-        ...tokenProvider,
-        fetchToken
+        fetchToken,
+        token
       }}
     >
       {children}
     </TokenContext.Provider>
   );
+};
+
+TokenProvider.propTypes = {
+  children: PropTypes.node
 };
 
 export default TokenProvider;

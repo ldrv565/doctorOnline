@@ -28,7 +28,7 @@ const useParticipants = (roomName, token) => {
     };
   }, [room]);
 
-  return participants;
+  return [participants, room];
 };
 
 export default useParticipants;

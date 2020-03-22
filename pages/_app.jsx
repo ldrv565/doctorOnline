@@ -10,10 +10,6 @@ import theme from 'core/theme/theme';
 import { TokenProvider } from 'components/providers';
 
 class MyApp extends App {
-  state = {
-    token: ''
-  };
-
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
@@ -23,10 +19,6 @@ class MyApp extends App {
 
     return { pageProps };
   }
-
-  setToken = token => {
-    this.setState({ token });
-  };
 
   render() {
     const { Component, pageProps } = this.props;
@@ -59,12 +51,7 @@ class MyApp extends App {
             </Head>
             <CssBaseline />
             <GlobalStyle />
-            <TokenProvider
-              tokenProvider={{
-                token: this.state.token,
-                setToken: this.setToken
-              }}
-            >
+            <TokenProvider>
               <Component {...pageProps} pageContext={this.pageContext} />
             </TokenProvider>
           </ThemeProvider>

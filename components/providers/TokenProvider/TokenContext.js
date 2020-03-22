@@ -4,7 +4,6 @@ const noop = () => {};
 
 const TokenContext = createContext({
   token: null,
-  setToken: noop,
   fetchToken: noop
 });
 
