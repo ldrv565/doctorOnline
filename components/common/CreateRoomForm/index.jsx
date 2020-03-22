@@ -3,17 +3,18 @@ import Router from 'next/router';
 import { useToken } from '../hooks';
 
 const CreateRoomForm = () => {
-  const { fetchToken, token } = useToken();
+  const { fetchToken } = useToken();
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 
-  const handleSubmit = () => {
-    fetchToken(name, room);
+  const handleSubmit = async () => {
+    try {
+      await fetchToken(name, room);
+      Router.push(`/room/${room}`);
+    } catch (e) {
+      alert(e.message);
+    }
   };
-
-  useEffect(() => {
-    if (token) Router.push(`/room/${room}`);
-  }, [token]);
 
   return (
     <div>

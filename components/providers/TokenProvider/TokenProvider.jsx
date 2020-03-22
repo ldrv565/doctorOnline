@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import TokenContext from './TokenContext';
 
-const TokenProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+const TokenProvider = ({ children, tokenProvider }) => {
   const fetchToken = async (username, roomName) => {
     const data = await fetch(
       `/api/token?identity=${username}&roomName=${roomName}`,
@@ -16,13 +15,22 @@ const TokenProvider = ({ children }) => {
       }
     )
       .then(res => res.json())
-      .then(res => setToken(res.token));
+      .then(res => {localStorage.setItem('token', res.token); return res;})
+      .then(res => tokenProvider.setToken(res.token));
   };
+
+  useEffect(() => {
+    if (process.browser) {
+      if (localStorage.getItem('token')) {
+        tokenProvider.setToken(localStorage.getItem('token'));
+      }
+    }
+  }, []);
 
   return (
     <TokenContext.Provider
       value={{
-        token,
+        ...tokenProvider,
         fetchToken
       }}
     >
