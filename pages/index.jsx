@@ -1,8 +1,13 @@
 import React from 'react';
 import { Layout } from 'components';
+import CreateRoomForm from '../components/common/CreateRoomForm';
 
 const IndexPage = () => {
-  return <Layout>Index page</Layout>;
+  return (
+    <Layout>
+      <CreateRoomForm />
+    </Layout>
+  );
 };
 
 export default IndexPage;

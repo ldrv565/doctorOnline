@@ -1,13 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import { List as MuiList, ListItem } from '@material-ui/core';
 
 const List = ({ data, renderItem }) => {
-  return <ListStyled>{data.map(renderItem)}</ListStyled>;
+  return <MuiList>{data.map(renderItem)}</MuiList>;
 };
 
-const ListStyled = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-`;
+List.Item = ListItem;
 
 export default List;
