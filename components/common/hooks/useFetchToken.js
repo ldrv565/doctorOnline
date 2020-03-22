@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { DEFAULT_DOCTOR_NAME } from 'constants';
 
 const INITIAL_STATE = {
   data: null,
@@ -7,10 +8,10 @@ const INITIAL_STATE = {
   success: false
 };
 
-const useFetchToken = (roomName, userName = 'Doctor', lazy = false) => {
+const useFetchToken = (roomName, userName = DEFAULT_DOCTOR_NAME, lazy = false) => {
   const [status, setStatus] = useState(INITIAL_STATE);
 
-  const request = useCallback(async (room, name = 'Doctor') => {
+  const request = useCallback(async (room, name = DEFAULT_DOCTOR_NAME) => {
     setStatus({ ...status, fetching: true });
     try {
       const response = await fetch(

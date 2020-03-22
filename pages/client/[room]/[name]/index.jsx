@@ -30,7 +30,6 @@ const ClientRoom = ({ name }) => {
     <RoomLayout>
       <Grid container>
         <Grid item xs={3}>
-          <Typography variant="h5">Название комнаты: {name}</Typography>
           <ConnectButton
             color="primary"
             variant="contained"

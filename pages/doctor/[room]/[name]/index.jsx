@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useFetchToken, useParticipants } from 'components/common/hooks';
 
 import { Layout } from 'components';
+
 import { List } from 'components/common';
 
 const DoctorRoom = ({ name }) => {
@@ -28,16 +29,18 @@ const DoctorRoom = ({ name }) => {
 
   return (
     <RoomLayout>
-      <Typography variant="h5">Название комнаты: {name}</Typography>
-      <Typography variant="h5">Участники: </Typography>
-      <List
-        data={participants}
-        renderItem={participant => (
-          <List.Item button onClick={handleClickParticipant(participant)}>
-            {participant.identity}
-          </List.Item>
-        )}
-      />
+      <div>
+        <Typography variant="h5">Участники: </Typography>
+        <div>Выберите участника для создания конференции</div>
+        <List
+          data={participants}
+          renderItem={participant => (
+            <List.Item button onClick={handleClickParticipant(participant)}>
+              {participant.identity}
+            </List.Item>
+          )}
+        />
+      </div>
     </RoomLayout>
   );
 };
