@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Layout, Doctor } from 'components';
+import { Layout, Patient } from 'components';
 
 const DoctorPage = () => {
   return (
     <Layout>
-      <Doctor />
+      <Patient />
     </Layout>
   );
 };
