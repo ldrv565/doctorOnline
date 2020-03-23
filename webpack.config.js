@@ -51,7 +51,9 @@ module.exports = {
         services: path.resolve(__dirname, './services'),
         sources: path.resolve(__dirname, './sources'),
         graphQL: path.resolve(__dirname, './graphql'),
-        public: path.resolve(__dirname, './public')
+        public: path.resolve(__dirname, './public'),
+        api: path.resolve(__dirname, './api'),
+        hooks: path.resolve(__dirname, './hooks')
       }
     },
     node: {

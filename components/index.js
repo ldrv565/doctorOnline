@@ -1,9 +1,5 @@
 import Layout from './Layout';
+import Patient from './Patient';
+import Doctor from './Doctor';
 
-import {
-  AppStateProvider as TwilioVideoStateProvider,
-  VideoApp,
-  LoginPage
-} from './TwilioVideo';
-
-export { Layout, TwilioVideoStateProvider, VideoApp, LoginPage };
+export { Layout, Patient, Doctor };

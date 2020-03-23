@@ -1,4 +1,5 @@
 const { AccessToken } = require('twilio').jwt;
+// const Video = require('twilio-video');
 
 const { VideoGrant } = AccessToken;
 
@@ -7,8 +8,7 @@ const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
 const twilioApiKeySID = process.env.TWILIO_API_KEY_SID;
 const twilioApiKeySecret = process.env.TWILIO_API_KEY_SECRET;
 
-module.exports = (req, res) => {
-  const { identity, roomName } = req.query;
+const getTokenWithGrant = (identity, roomName) => {
   const token = new AccessToken(
     twilioAccountSid,
     twilioApiKeySID,
@@ -21,5 +21,14 @@ module.exports = (req, res) => {
   token.identity = identity;
   const videoGrant = new VideoGrant({ room: roomName });
   token.addGrant(videoGrant);
-  res.send(token.toJwt());
+
+  return token.toJwt();
+};
+
+module.exports = async (req, res) => {
+  const { identity, roomName } = req.query;
+
+  const token = getTokenWithGrant(identity, roomName);
+
+  res.send(JSON.stringify({ token }));
 };

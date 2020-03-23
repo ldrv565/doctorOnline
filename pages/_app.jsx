@@ -6,7 +6,6 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'core/theme/theme';
-import { TwilioVideoStateProvider } from 'components';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -50,9 +49,7 @@ class MyApp extends App {
             </Head>
             <CssBaseline />
             <GlobalStyle />
-            <TwilioVideoStateProvider>
-              <Component {...pageProps} pageContext={this.pageContext} />
-            </TwilioVideoStateProvider>
+            <Component {...pageProps} pageContext={this.pageContext} />
           </ThemeProvider>
         </MuiThemeProvider>
       </StylesProvider>

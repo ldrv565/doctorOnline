@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { VideoApp } from 'components';
+import { Layout, Patient } from 'components';
 
 const IndexPage = () => {
-  return <VideoApp />;
+  return (
+    <Layout>
+      <Patient />
+    </Layout>
+  );
 };
 
 export default IndexPage;
