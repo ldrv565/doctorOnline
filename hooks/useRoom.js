@@ -56,7 +56,7 @@ const useRoom = (username = 'Доктор', roomName = 'room') => {
   };
 
   useEffect(() => {
-    if (roomName === 'room') {
+    if (roomName === 'room' && username !== 'Доктор') {
       checkUsernameUniqueness(username, roomName).then(uniqueness => {
         if (uniqueness) {
           getToken(username, roomName).then(tokenData =>

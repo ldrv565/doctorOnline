@@ -103,6 +103,14 @@ const Container = styled.div`
   video {
     height: 40vh;
     border-radius: 8px;
+
+    max-width: 100%;
+
+    @media (max-width: 460px) {
+      height: auto;
+      width: 100%;
+      margin: 0 24px;
+    }
   }
 `;
 
