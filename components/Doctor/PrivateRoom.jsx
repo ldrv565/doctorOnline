@@ -27,10 +27,11 @@ const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
 
       <Me participant={room.localParticipant} />
 
-      {participants.length &&
+      {(participants.length &&
         participants.map(participant => (
           <Participant participant={participant} />
-        ))}
+        ))) ||
+        'Пациент потерял связь'}
     </>
   );
 };
