@@ -18,7 +18,8 @@
       {
         "root": ["./"],
         "alias": {
-          "graphQL": "./graphql"
+          "api": "./api",
+          "hooks": "./hooks"
         }
       }
     ]

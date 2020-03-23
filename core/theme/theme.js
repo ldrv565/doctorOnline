@@ -20,9 +20,7 @@ const { primary, secondary, tertiary, body, card, gray } = defaultPalette;
 const { error, warning, success } = statuses;
 
 export default createMuiTheme({
-  sidebarWidth: 260,
   palette: {
-    type: 'dark',
     gray: {
       light: lighten(0.32, gray),
       main: gray,
