@@ -24,33 +24,33 @@ const ParticipantStyles = styled(Participant)`
 `;
 
 const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
-  // const { room, participants } = useRoom('Доктор', roomName);
+  const { room, participants } = useRoom('Доктор', roomName);
 
-  // if (!room) {
-  //   return <div>Подключение к {roomName}</div>;
-  // }
+  if (!room) {
+    return <div>Подключение к {roomName}</div>;
+  }
 
   return (
     <>
       <TopBar />
-      {/*<VideoWrapper>*/}
-      {/*  <Me />*/}
-      {/*</VideoWrapper>*/}
-      {/*<ButtonStyled*/}
-      {/*  variant="contained"*/}
-      {/*  color="primary"*/}
-      {/*  onClick={resetSelectedRoom}*/}
-      {/*>*/}
-      {/*  Вернуться к выбору пациента*/}
-      {/*</ButtonStyled>*/}
+      <VideoWrapper>
+        <Me />
+      </VideoWrapper>
+      <ButtonStyled
+        variant="contained"
+        color="primary"
+        onClick={resetSelectedRoom}
+      >
+        Вернуться к выбору пациента
+      </ButtonStyled>
 
-      {/*<Me />*/}
-      {/*<Participant />*/}
-      {/*{(participants.length &&*/}
-      {/*  participants.map(participant => (*/}
-      {/*    <Participant participant={participant} />*/}
-      {/*  ))) ||*/}
-      {/*  'Пациент потерял связь'}*/}
+      <Me participant={room.localParticipant} />
+
+      {(participants.length &&
+        participants.map(participant => (
+          <Participant participant={participant} />
+        ))) ||
+      'Пациент потерял связь'}
     </>
   );
 };
