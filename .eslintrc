@@ -29,7 +29,9 @@
         ["services", "./services"],
         ["sources", "./sources"],
         ["graphQL", "./graphql"],
-        ["public", "./public"]
+        ["public", "./public"],
+        ["api", "./api"],
+        ["hooks", "./hooks"]
       ]
     }
   }

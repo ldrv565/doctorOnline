@@ -1,8 +1,13 @@
 import React from 'react';
-import { TwilioVideo } from 'components';
+
+import { Layout, Patient } from 'components';
 
 const IndexPage = () => {
-  return <TwilioVideo />;
+  return (
+    <Layout>
+      <Patient />
+    </Layout>
+  );
 };
 
 export default IndexPage;

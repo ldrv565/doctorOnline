@@ -1,4 +1,5 @@
 import Layout from './Layout';
-import TwilioVideo from './TwilioVideo';
+import Patient from './Patient';
+import Doctor from './Doctor';
 
-export { Layout, TwilioVideo };
+export { Layout, Patient, Doctor };
