@@ -15,6 +15,10 @@ const ClientRoom = ({ name }) => {
   const [token, setToken] = useState(null);
   const [participants, room] = useParticipants(name, token);
   const [requestStatus, request] = useFetchToken('', '', true);
+  const [privateParticipants, privateRoom] = useParticipants(
+    requestStatus.data,
+    room.localParticipant.sid
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -26,22 +30,18 @@ const ClientRoom = ({ name }) => {
       request(room.localParticipant.sid, room.localParticipant.identity);
   }, [room]);
 
+  useEffect(() => {
+    if (privateRoom && privateParticipants.length > 0) {
+      router.push(
+        `/conference/${room.localParticipant.sid}/${requestStatus.data}`
+      );
+    }
+  }, [privateRoom]);
+
   return (
     <RoomLayout>
       <Grid container>
         <Grid item xs={3}>
-          <ConnectButton
-            color="primary"
-            variant="contained"
-            disabled={requestStatus.fetching || requestStatus.error}
-            onClick={() =>
-              router.push(
-                `/conference/${room.localParticipant.sid}/${requestStatus.data}`
-              )
-            }
-          >
-            Перейти в комнату ожидания
-          </ConnectButton>
           <Typography variant="h5">Участники: </Typography>
           <List
             data={participants}
@@ -65,10 +65,6 @@ ClientRoom.propTypes = {
 ClientRoom.getInitialProps = ({ query: { name } }) => {
   return { name };
 };
-
-const ConnectButton = styled(Button)`
-  margin-bottom: 10px;
-`;
 
 const RoomLayout = styled(Layout)`
   padding: 20px;
