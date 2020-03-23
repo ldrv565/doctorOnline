@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { Layout, Doctor } from 'components';
+import { Doctor } from 'components';
 
 const IndexPage = () => {
-  return (
-    <Layout>
-      <Doctor />
-    </Layout>
-  );
+  return <Doctor />;
 };
 
 export default IndexPage;
