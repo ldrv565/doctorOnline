@@ -31,7 +31,7 @@ const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
         participants.map(participant => (
           <Participant participant={participant} />
         ))) ||
-        null}
+        'Пациент потерял связь'}
     </>
   );
 };
