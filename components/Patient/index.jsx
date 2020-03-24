@@ -15,8 +15,8 @@ const Patient = () => {
 
   useEffect(() => {
     getIdentity().then(({ identity }) => {
+      setLoading(false);
       if (identity) {
-        setLoading(false);
         setUsername(identity);
       }
     });
