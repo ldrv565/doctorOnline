@@ -21,6 +21,8 @@ const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
   const [muted, setMuted] = useState(false);
   const toggleMuted = () => setMuted(!muted);
 
+  const patient = participants[0];
+
   if (!room) {
     return <Loader>Подключение к {roomName}</Loader>;
   }
@@ -28,12 +30,16 @@ const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
   return (
     <>
       <VideoWrapper>
-        {participants[0] ? (
-          <ParticipantStyled
-            key={participants[0].sid}
-            volume={value / 100}
-            participant={participants[0]}
-          />
+        {patient ? (
+          <>
+            <PatientName>{patient.identity}</PatientName>
+
+            <ParticipantStyled
+              key={patient.sid}
+              volume={value / 100}
+              participant={patient}
+            />
+          </>
         ) : (
           'Пациент потерял связь'
         )}
@@ -83,6 +89,7 @@ const Me = styled(Participant)`
 `;
 
 const VideoWrapper = styled.div`
+  position: relative;
   display: flex;
   height: calc(100vh - 64px);
   justify-content: center;
@@ -127,4 +134,16 @@ const SliderContainer = styled.div`
   svg {
     margin: 4px;
   }
+`;
+
+const PatientName = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px 8px;
+  border-radius: 24px;
+  margin: 24px;
+
+  background: ${({ theme }) => theme.palette.primary.main};
+  color: ${({ theme }) => theme.palette.primary.contrastText};
 `;
