@@ -8,11 +8,13 @@ module.exports = (req, res) => {
   let { identity } = req.query;
 
   if (identity) {
-    cookies.set('identity', identity, {
+    cookies.set('identity', encodeURI(identity), {
       overwrite: true
     });
   } else {
     identity = cookies.get('identity');
+
+    identity = identity && decodeURI(identity);
   }
 
   return res.send(JSON.stringify({ identity }));
