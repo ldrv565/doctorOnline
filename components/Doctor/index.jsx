@@ -64,7 +64,6 @@ const MenuItemStyled = styled(MenuItem)`
 `;
 
 const List = styled.div`
-  margin-top: 24px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.palette.divider};
