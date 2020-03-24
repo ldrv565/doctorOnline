@@ -76,8 +76,7 @@ const Participant = ({ participant, ...rest }) => {
   }, [audioTracks]);
 
   return (
-    <Container {...rest}>
-      <Title>{participant.identity}</Title>
+    <Container>
       <video ref={videoRef} autoPlay />
       <audio ref={audioRef} autoPlay />
     </Container>
@@ -91,31 +90,14 @@ Participant.propTypes = {
 export default Participant;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  &:not(:last-of-type) {
-    margin-bottom: 24px;
+  video {
+    height: 100%;
   }
 
-  video {
-    height: 40vh;
-    border-radius: 8px;
-
-    max-width: 100%;
-
-    @media (max-width: 460px) {
-      height: auto;
+  @media (max-width: 1125px) {
+    video {
       width: 100%;
-      margin: 0 24px;
+      height: auto;
     }
   }
-`;
-
-const Title = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 24px;
 `;

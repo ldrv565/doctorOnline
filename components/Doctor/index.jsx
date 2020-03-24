@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import { MenuItem } from '@material-ui/core';
 
+import { Loader } from 'components/common';
 import { useRoom } from 'hooks';
 
-import Participant from '../Participant';
 import PrivateRoom from './PrivateRoom';
+import Layout from '../Layout';
 
 const DoctorPage = () => {
   const { room, participants } = useRoom();
@@ -15,14 +15,12 @@ const DoctorPage = () => {
   const resetSelectedRoom = () => setSelectedRoom(null);
 
   if (!room && !selectedRoom) {
-    return <div>Loading...</div>;
+    return <Loader>Loading...</Loader>;
   }
 
   if (!selectedRoom) {
     return (
-      <>
-        <Participant participant={room.localParticipant} />
-
+      <Layout>
         {participants.length ? (
           <List>
             {participants.map(participant => {
@@ -45,7 +43,7 @@ const DoctorPage = () => {
         ) : (
           <div>Ожидание пациентов</div>
         )}
-      </>
+      </Layout>
     );
   }
 

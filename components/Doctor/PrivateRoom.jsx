@@ -4,54 +4,30 @@ import styled from 'styled-components';
 
 import { useRoom } from 'hooks';
 
-import { Button } from '@material-ui/core';
-
 import Participant from '../Participant';
 import TopBar from './TopBar';
-
-const VideoWrapper = styled.div`
-  display: flex;
-  height: calc(100vh - 64px);
-  background: red;
-`;
-
-const ParticipantStyles = styled(Participant)`
-  video {
-      height: 100%;
-      width: 100%;
-      object-fit: fill;
-  }
-`;
+import { Loader } from '../common';
 
 const GeneralRoom = ({ roomName, resetSelectedRoom }) => {
   const { room, participants } = useRoom('Доктор', roomName);
 
   if (!room) {
-    return <div>Подключение к {roomName}</div>;
+    return <Loader>Подключение к {roomName}</Loader>;
   }
 
   return (
-    <>
+    <Wrapper>
       <TopBar />
       <VideoWrapper>
-        <Me />
+        {(participants.length &&
+          participants.map(participant => (
+            <Participant key={participant.sid} participant={participant} />
+          ))) ||
+          'Пациент потерял связь'}
       </VideoWrapper>
-      <ButtonStyled
-        variant="contained"
-        color="primary"
-        onClick={resetSelectedRoom}
-      >
-        Вернуться к выбору пациента
-      </ButtonStyled>
 
-      <Me participant={room.localParticipant} />
-
-      {(participants.length &&
-        participants.map(participant => (
-          <Participant participant={participant} />
-        ))) ||
-      'Пациент потерял связь'}
-    </>
+      {/* <Me participant={room.localParticipant} /> */}
+    </Wrapper>
   );
 };
 
@@ -64,9 +40,20 @@ export default GeneralRoom;
 const Me = styled(Participant)`
   video {
     height: 15vh;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
   }
 `;
 
-const ButtonStyled = styled(Button)`
-  margin-bottom: 24px;
+const VideoWrapper = styled.div`
+  display: flex;
+  height: calc(100vh - 64px);
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 `;

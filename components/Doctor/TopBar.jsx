@@ -29,6 +29,7 @@ const ProfileWrapper = styled.div`
 
 const ProfileName = styled.p`
   color: ${({ theme }) => theme.palette.primary.main};
+  margin-right: 10px;
 `;
 
 const TopBar = () => {
