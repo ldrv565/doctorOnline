@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { useRoom } from 'hooks';
-import { Layout as MainLayout } from 'components';
 
 import Participant from '../Participant';
 

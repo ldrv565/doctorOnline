@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { getIdentity } from 'api';
-import { Layout as MainLayout } from 'components';
+import { Button } from '@material-ui/core';
 
+import { getIdentity, logout } from 'api';
+
+import MainLayout from '../Layout';
 import GeneralRoom from './GeneralRoom';
+
 import { ButtonStyled, FormTitle, Title, UserField } from './styled';
 import { Layout } from './Layout';
 
@@ -16,10 +19,10 @@ const Patient = () => {
 
   useEffect(() => {
     getIdentity().then(({ identity }) => {
-      setLoading(false);
       if (identity) {
         setUsername(identity);
       }
+      setLoading(false);
     });
   }, []);
 
@@ -29,6 +32,11 @@ const Patient = () => {
     setError(false);
     setUsername(inputValue);
   };
+
+  const onClick = () =>
+    logout().then(() => {
+      setUsername('');
+    });
 
   if (isLoading) {
     return <MainLayout>Loading...</MainLayout>;
@@ -61,6 +69,9 @@ const Patient = () => {
 
   return (
     <MainLayout>
+      <LogoutButton variant="contained" color="primary" onClick={onClick}>
+        Выход
+      </LogoutButton>
       <GeneralRoom username={username} setError={setError} />
     </MainLayout>
   );
@@ -73,4 +84,8 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const LogoutButton = styled(Button)`
+  margin-bottom: 24px;
 `;

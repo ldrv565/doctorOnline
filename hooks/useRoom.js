@@ -65,10 +65,9 @@ const useRoom = (username = 'Доктор', roomName = 'room') => {
     if (roomName === 'room' && username !== 'Доктор') {
       checkUsernameUniqueness(username, roomName).then(uniqueness => {
         if (uniqueness) {
-          setIdentity(username);
-          getToken(username, roomName).then(tokenData =>
-            setToken(tokenData.token)
-          );
+          getToken(username, roomName).then(tokenData => {
+            setIdentity(username).then(() => setToken(tokenData.token));
+          });
         } else {
           setError(true);
         }
