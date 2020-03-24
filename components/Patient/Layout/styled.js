@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 import Logo from 'public/icons/logo.svg';
-import Bg from 'public/icons/bg.svg';
+import Bg from 'public/images/bg.png';
 
 const Page = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
   background: ${({ theme }) => theme.palette.background.primary}
-    url('public/icons/bg.svg') left center / auto auto no-repeat;
+    url(${Bg}) left center / auto auto no-repeat;
   overflow: hidden;
 
   @media (min-width: 768px) {
@@ -61,7 +61,7 @@ const Desc = styled.h2`
 const Content = styled.div`
   margin-bottom: 30px;
   padding: 32px 32px 24px;
-  background: ${({ theme }) => theme.palette.background.secondary};
+  background: white;
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   overflow: hidden;
