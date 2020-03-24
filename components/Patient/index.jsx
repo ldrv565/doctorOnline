@@ -60,9 +60,9 @@ const Patient = () => {
   }
 
   return (
-    <Layout>
+    <MainLayout>
       <GeneralRoom username={username} setError={setError} />
-    </Layout>
+    </MainLayout>
   );
 };
 

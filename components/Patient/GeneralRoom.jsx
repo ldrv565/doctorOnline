@@ -6,7 +6,6 @@ import { useRoom } from 'hooks';
 import { Layout as MainLayout } from 'components';
 
 import Participant from '../Participant';
-import { LoaderWrapper } from './styled';
 
 const GeneralRoom = ({ username, setError }) => {
   const { room, isError } = useRoom(username);
@@ -21,7 +20,7 @@ const GeneralRoom = ({ username, setError }) => {
   );
 
   if (!room) {
-    return <MainLayout>Loading...</MainLayout>;
+    return <div>Loading...</div>;
   }
 
   if (!privateParticipants.length) {
