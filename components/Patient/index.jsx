@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import { getIdentity } from 'api';
 
 import GeneralRoom from './GeneralRoom';
+import { FormTitle, LoaderWrapper, Title, UserField } from './styled';
+import { Layout } from './Layout';
 
 const Patient = () => {
   const [username, setUsername] = useState('');
@@ -30,28 +32,31 @@ const Patient = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderWrapper>Loading...</LoaderWrapper>;
   }
 
   if (!username || isError) {
     return (
-      <Form onSubmit={handleSubmit}>
-        {isError ? (
-          <Title>Введите другое имя</Title>
-        ) : (
-          <Title>Введите имя</Title>
-        )}
+      <Layout>
+        <Form onSubmit={handleSubmit} noValidate>
+          <FormTitle>Авторизация</FormTitle>
+          {isError ? (
+            <Title>Введите другое имя</Title>
+          ) : (
+            <Title>Введите имя</Title>
+          )}
+          <UserField
+            label="Логин"
+            required
+            error={false}
+            helperText={false}
+            value={inputValue}
+            onChange={handleUsernameChange}
+          />
 
-        <TextFieldStyled
-          required
-          value={inputValue}
-          onChange={handleUsernameChange}
-        />
-
-        <ButtonStyled type="submit" variant="contained" color="primary">
-          Принять
-        </ButtonStyled>
-      </Form>
+          <ButtonStyled type="submit">Войти</ButtonStyled>
+        </Form>
+      </Layout>
     );
   }
 
@@ -67,18 +72,6 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Title = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 24px;
-`;
-
 const ButtonStyled = styled(Button)`
   margin-top: 24px;
-`;
-
-const TextFieldStyled = styled(TextField)`
-  input {
-    text-align: center;
-  }
 `;

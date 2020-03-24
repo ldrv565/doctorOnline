@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useRoom } from 'hooks';
 
 import Participant from '../Participant';
+import { LoaderWrapper } from './styled';
 
 const GeneralRoom = ({ username, setError }) => {
   const { room, isError } = useRoom(username);
@@ -19,7 +20,7 @@ const GeneralRoom = ({ username, setError }) => {
   );
 
   if (!room) {
-    return <div>Loading...</div>;
+    return <LoaderWrapper>Loading...</LoaderWrapper>;
   }
 
   if (!privateParticipants.length) {
