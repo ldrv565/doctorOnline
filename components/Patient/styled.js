@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 const Form = styled.form`
   .MuiFormHelperText-root {
@@ -36,4 +36,18 @@ const Title = styled.div`
   margin-bottom: 24px;
 `;
 
-export { LoaderWrapper, Form, FormTitle, UserField, Title };
+const ButtonStyled = styled(Button)`
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(9.79deg, #0057c2 9.55%, #0095ff 100%);
+  border-radius: 8px;
+
+  span {
+    color: ${({ theme }) => theme.palette.primary.contrastText};
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: none;
+  }
+`;
+
+export { LoaderWrapper, Form, FormTitle, UserField, Title, ButtonStyled };

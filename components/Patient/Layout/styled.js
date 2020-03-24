@@ -7,8 +7,8 @@ const Page = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background: ${({ theme }) => theme.palette.background.primary} url(${Bg}) left
-    center / auto auto no-repeat;
+  background: ${({ theme }) => theme.palette.background.primary}
+    url('public/icons/bg.svg') left center / auto auto no-repeat;
   overflow: hidden;
 
   @media (min-width: 768px) {

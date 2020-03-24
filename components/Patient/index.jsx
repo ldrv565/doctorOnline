@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '@material-ui/core';
-
 import { getIdentity } from 'api';
+import { Layout as MainLayout } from 'components';
 
 import GeneralRoom from './GeneralRoom';
-import { FormTitle, LoaderWrapper, Title, UserField } from './styled';
+import { ButtonStyled, FormTitle, Title, UserField } from './styled';
 import { Layout } from './Layout';
 
 const Patient = () => {
@@ -32,7 +31,7 @@ const Patient = () => {
   };
 
   if (isLoading) {
-    return <LoaderWrapper>Loading...</LoaderWrapper>;
+    return <MainLayout>Loading...</MainLayout>;
   }
 
   if (!username || isError) {
@@ -60,7 +59,11 @@ const Patient = () => {
     );
   }
 
-  return <GeneralRoom username={username} setError={setError} />;
+  return (
+    <Layout>
+      <GeneralRoom username={username} setError={setError} />
+    </Layout>
+  );
 };
 
 export default Patient;
@@ -70,8 +73,4 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const ButtonStyled = styled(Button)`
-  margin-top: 24px;
 `;

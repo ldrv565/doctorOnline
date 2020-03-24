@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { useRoom } from 'hooks';
+import { Layout as MainLayout } from 'components';
 
 import Participant from '../Participant';
 import { LoaderWrapper } from './styled';
@@ -20,7 +21,7 @@ const GeneralRoom = ({ username, setError }) => {
   );
 
   if (!room) {
-    return <LoaderWrapper>Loading...</LoaderWrapper>;
+    return <MainLayout>Loading...</MainLayout>;
   }
 
   if (!privateParticipants.length) {
