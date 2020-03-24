@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MenuItem } from '@material-ui/core';
 
 import { Loader } from 'components/common';
 import { useRoom } from 'hooks';
 
+import { useRouter } from 'next/router';
 import PrivateRoom from './PrivateRoom';
 import Layout from '../Layout';
 
 const DoctorPage = () => {
+  const {
+    query: { patientIdentity }
+  } = useRouter();
   const { room, participants } = useRoom();
-
   const [selectedRoom, setSelectedRoom] = useState(null);
   const resetSelectedRoom = () => setSelectedRoom(null);
+
+  useEffect(() => {
+    if (patientIdentity) setSelectedRoom(patientIdentity);
+  }, [patientIdentity]);
 
   if (!room && !selectedRoom) {
     return <Loader>Loading...</Loader>;
