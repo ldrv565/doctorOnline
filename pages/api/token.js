@@ -1,5 +1,6 @@
 const { AccessToken } = require('twilio').jwt;
-// const Video = require('twilio-video');
+
+const Cookies = require('cookies');
 
 const { VideoGrant } = AccessToken;
 
@@ -25,10 +26,31 @@ const getTokenWithGrant = (identity, roomName) => {
   return token.toJwt();
 };
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
   const { identity, roomName } = req.query;
 
-  const token = getTokenWithGrant(identity, roomName);
+  const isCheck = identity?.split('.')[0] === 'check';
 
-  res.send(JSON.stringify({ token }));
+  if (isCheck) {
+    const token = getTokenWithGrant(identity, roomName);
+    return res.send(JSON.stringify({ token }));
+  }
+
+  const cookies = new Cookies(req, res, {
+    keys: ['generalToken', 'privateToken']
+  });
+
+  const tokenType = {
+    room: 'generalToken',
+    [identity]: 'privateToken'
+  };
+
+  let token = cookies.get(tokenType[roomName]);
+
+  if (!token) {
+    token = getTokenWithGrant(identity, roomName);
+    cookies.set(tokenType[roomName], token);
+  }
+
+  return res.send(JSON.stringify({ token }));
 };

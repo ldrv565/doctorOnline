@@ -1,3 +1,5 @@
 import getToken from './getToken';
+import getIdentity from './getIdentity';
+import setIdentity from './setIdentity';
 
-export { getToken };
+export { getToken, getIdentity, setIdentity };

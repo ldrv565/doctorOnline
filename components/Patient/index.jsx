@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Button, TextField } from '@material-ui/core';
+
+import { getIdentity } from 'api';
 
 import GeneralRoom from './GeneralRoom';
 
@@ -9,6 +11,16 @@ const Patient = () => {
   const [username, setUsername] = useState('');
   const [inputValue, setInputValue] = useState(username);
   const [isError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getIdentity().then(({ identity }) => {
+      if (identity) {
+        setLoading(false);
+        setUsername(identity);
+      }
+    });
+  }, []);
 
   const handleUsernameChange = event => setInputValue(event.target.value);
 
@@ -16,6 +28,10 @@ const Patient = () => {
     setError(false);
     setUsername(inputValue);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!username || isError) {
     return (

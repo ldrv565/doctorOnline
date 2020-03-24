@@ -2,9 +2,17 @@ import { useState, useEffect } from 'react';
 
 import Video from 'twilio-video';
 
-import { getToken } from 'api';
+import { getToken, getIdentity, setIdentity } from 'api';
 
 const checkUsernameUniqueness = async (username, roomName) => {
+  let uniqueness = true;
+
+  const data = await getIdentity();
+
+  if (data.identity === username) {
+    return uniqueness;
+  }
+
   const { token: checkToken } = await getToken(
     `check.${+new Date()}`,
     roomName
@@ -13,8 +21,6 @@ const checkUsernameUniqueness = async (username, roomName) => {
   const room = await Video.connect(checkToken, {
     name: roomName
   });
-
-  let uniqueness = true;
 
   room.participants.forEach(participant => {
     if (participant.identity === username) {
@@ -59,6 +65,7 @@ const useRoom = (username = 'Доктор', roomName = 'room') => {
     if (roomName === 'room' && username !== 'Доктор') {
       checkUsernameUniqueness(username, roomName).then(uniqueness => {
         if (uniqueness) {
+          setIdentity(username);
           getToken(username, roomName).then(tokenData =>
             setToken(tokenData.token)
           );
