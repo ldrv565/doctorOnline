@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Participant = ({ participant, ...rest }) => {
+const Participant = ({ volume, participant, ...rest }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
 
@@ -76,28 +76,21 @@ const Participant = ({ participant, ...rest }) => {
   }, [audioTracks]);
 
   return (
-    <Container>
-      <video ref={videoRef} autoPlay />
-      <audio ref={audioRef} autoPlay />
-    </Container>
+    <>
+      <Video ref={videoRef} volume={volume || 1} autoPlay {...rest} />
+      <audio ref={audioRef} volume={volume || 1} autoPlay />
+    </>
   );
 };
 
 Participant.propTypes = {
+  volume: PropTypes.number,
   participant: PropTypes.object
 };
 
 export default Participant;
 
-const Container = styled.div`
-  video {
-    height: 100%;
-  }
-
-  @media (max-width: 1125px) {
-    video {
-      width: 100%;
-      height: auto;
-    }
-  }
+const Video = styled.video`
+  height: 100%;
+  width: 100%;
 `;
